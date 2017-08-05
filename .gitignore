@@ -47,3 +47,5 @@ Thumbs.db
 
 # Local files containing secrets/keys etc.
 settings_local.py
+dev-proxy.conf.js
+ng-src/environments/environment.ts
