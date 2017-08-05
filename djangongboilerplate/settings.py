@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+import dj_database_url
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -18,14 +19,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')34)r&n9d7ldy0lb6#6c@6xm-x-#)v&%tc3u99#3c#%*1_+#-2'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -37,9 +30,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'raven.contrib.django.raven_compat',
+    'rest_framework',
+    'api.apps.ApiConfig',
+    'django_nose'  # Must be last
 ]
 
 MIDDLEWARE = [
+    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -69,33 +67,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangongboilerplate.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
-
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.'
+                'password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.'
+                'password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.'
+                'password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.'
+                'password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -118,3 +108,26 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+try:
+    from djangongboilerplate.settings_local import *  # NOQA
+except:
+    import raven  # NOQA
+    print('No settings_local.py available.')
+    ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS']
+    DATABASES = \
+        {'default': dj_database_url.config(default=os.environ['DATABASE_URL'])}
+    DEBUG = os.environ['DEBUG'] == 'True'
+    EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
+    RAVEN_CONFIG = {
+        'dsn': os.environ['RAVEN_CONFIG_DSN'],
+        'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+    }
+    SECRET_KEY = os.environ['SECRET_KEY']
+    STATIC_ROOT = os.environ['STATIC_ROOT']
+
+try:
+    from djangongboilerplate.settings_logging import *  # NOQA
+except:
+    print('Error loading logging configuration')
+    raise

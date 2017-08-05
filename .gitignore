@@ -41,3 +41,9 @@ yarn-error.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# sqlite Databases
+*.sqlite3
+
+# Local files containing secrets/keys etc.
+settings_local.py
