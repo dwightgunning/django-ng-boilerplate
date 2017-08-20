@@ -1,8 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
-
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/toPromise';
 import * as WebFont from 'webfontloader';
 
 declare let $: any;
@@ -15,10 +11,8 @@ declare let $: any;
 })
 export class AppComponent implements OnInit {
   title = 'Django Angular Boilerplate';
-  url = 'http://localhost:8000/api/';
-  apiResponse;
 
-  constructor(private http: Http) { }
+  constructor() { }
 
   ngOnInit() {
     console.log('AppComponent initializing...');
@@ -28,16 +22,6 @@ export class AppComponent implements OnInit {
       google: {
       families: ['Open+Sans']
       }
-    });
-
-
-    this.getApi();
-  }
-
-  public getApi() {
-    this.http.get(this.url).toPromise().then((res) => {
-      this.apiResponse = res;
-      console.log(res);
     });
   }
 }

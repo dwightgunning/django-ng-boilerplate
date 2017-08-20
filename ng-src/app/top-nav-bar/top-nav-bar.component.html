@@ -1,0 +1,18 @@
+<div class="top-bar">
+  <div class="top-bar-left">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li class="menu-text">
+        <h1><a [routerLink]="''">Django - Angular Boilerplate</a></h1>
+      </li>
+    </ul>
+  </div>
+  <div class="top-bar-right">
+    <ul class="dropdown menu" data-dropdown-menu>
+      <li *ngIf="!isAuthenticated()"><a class="hvr-line" [routerLink]="'login'" routerLinkActive="active-link">Login</a></li>
+      <li *ngIf="isAuthenticated()"><a class="hvr-line" [routerLink]="'profile'" routerLinkActive="active-link">Profile</a></li>
+      <li *ngIf="isAuthenticated()">
+        <a class="hvr-line" (click)="logoutUser()" routerLinkActive="active-link">Logout</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+@import '../../assets/foundation-sites/_settings';
+
+li.menu-text h1 > a {
+  font-size: rem-calc(map-deep-get($header-styles, small, h4, font-size));
+}

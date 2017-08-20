@@ -1,0 +1,15 @@
+<form #loginForm="ngForm" (submit)="loginFormSubmit()">
+  <label for="username">Username:</label>
+  <input id="username" name="username" type="text" placeholder="username" [(ngModel)]="model.username" #username="ngModel" required>
+    <div [hidden]="username.valid || (username.pristine && username.untouched)"
+       class="alert alert-danger">
+    Username is required
+  </div>
+  <label for="password">Password:</label>
+  <input id="password" name="password" type="password" placeholder="password" [(ngModel)]="model.password" #password="ngModel" required>
+  <div [hidden]="password.valid || (password.pristine && password.untouched)"
+       class="alert alert-danger">
+    Password is required
+  </div>
+  <button type="submit" class="button primary" [disabled]="!loginForm.form.valid">Login</button>
+</form>
