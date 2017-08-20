@@ -96,7 +96,9 @@ def get_changed_files():
     for line in filelist.decode().split('\n'):
         if not line:
             break
-        action, filename = line.strip().split()
+        segments = line.strip().split()
+        action = segments[0]
+        filename = segments[-1]
         if filename.endswith('.py') and action != 'D':
             files.append(os.path.join(project_root, filename))
     return files

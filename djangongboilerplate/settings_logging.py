@@ -2,7 +2,6 @@
 #                          django.db.backends, django.security.*
 from django.conf import settings
 
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
