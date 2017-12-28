@@ -1,5 +1,13 @@
-@import '../../assets/foundation-sites/_settings';
+@import '~assets/foundation-sites/settings';
 
-li.menu-text h1 > a {
-  font-size: rem-calc(map-deep-get($header-styles, small, h4, font-size));
+.top-bar {
+  margin-bottom: 40px;
+}
+
+.menu-text {
+  h1 {
+    a {
+      font-size: rem-calc(map-deep-get($header-styles, small, h4, font-size));
+    }
+  }
 }
