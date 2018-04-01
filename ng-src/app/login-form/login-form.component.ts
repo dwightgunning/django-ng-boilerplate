@@ -10,27 +10,30 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login-form.component.scss']
 })
 export class LoginFormComponent implements OnInit {
-  error = '';
+  error: any;
   model = new UserLoginCredentials();
-
   submitted = false;
 
   constructor(
     private router: Router,
-    private AuthService: AuthService) { }
+    private authService: AuthService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   loginFormSubmit() {
     this.submitted = true;
-    this.AuthService.login(this.model)
-      .subscribe(result => {
-                      if (result === true) {
-                          this.router.navigate(['/profile']);
-                      } else {
-                          this.error = 'Username or password is incorrect';
-                      }
-                  });
+    this.authService.login(this.model).subscribe(
+      (response) => {
+        this.submitted = false;
+        if (response instanceof UserLoginCredentials) {
+          this.router.navigate(['/write']);
+        } else {
+          this.error = response;
+        }
+      },
+      (error) => {
+        this.submitted = false;
+        this.error = error;
+      });
   }
 }

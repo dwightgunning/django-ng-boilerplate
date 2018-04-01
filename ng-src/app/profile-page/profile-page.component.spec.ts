@@ -1,9 +1,22 @@
+import { Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpModule } from '@angular/http';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { AuthService } from '../services/auth.service';
+import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs/Observable';
+
+import { UserLoginCredentials } from '../models/user-login-credentials';
 import { UserService } from '../services/user.service';
 import { ProfilePageComponent } from './profile-page.component';
+
+@Component({selector: 'app-profile-form', template: ''})
+class StubProfileFormComponent {}
+
+const userServiceStub = {
+  getUser(): Observable<UserLoginCredentials> {
+    return Observable.of(new UserLoginCredentials());
+  }
+};
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
@@ -11,15 +24,15 @@ describe('ProfilePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpModule
-      ],
       declarations: [
-        ProfilePageComponent
+        ProfilePageComponent,
+        StubProfileFormComponent
+      ],
+      imports: [
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
-        AuthService,
-        UserService
+        {provide: UserService, useValue: userServiceStub }
       ]
     })
     .compileComponents();
@@ -33,5 +46,14 @@ describe('ProfilePageComponent', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have the title "Profile"', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Profile');
+  });
+
+  xit('should input the user object into the child form', () => {
+    expect(false).toBeTruthy();
   });
 });

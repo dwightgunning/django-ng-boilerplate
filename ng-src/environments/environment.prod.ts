@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  SENTRY_PUBLIC_DSN: 'https://eab00d5e5b77482dbb680c16d6db5943@sentry.io/200056'
+  SENTRY_DSN_PUBLIC: '%SENTRY_DSN_PUBLIC%',
+  API_BASE_URL: '%API_BASE_URL%/api/'
 };

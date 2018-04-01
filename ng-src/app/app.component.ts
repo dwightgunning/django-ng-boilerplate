@@ -3,7 +3,6 @@ import * as WebFont from 'webfontloader';
 
 declare let $: any;
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

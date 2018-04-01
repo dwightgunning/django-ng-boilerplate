@@ -12,4 +12,9 @@
     Password is required
   </div>
   <button type="submit" class="button primary" [disabled]="!loginForm.form.valid">Login</button>
+  <div *ngIf="submitted">Loading...</div>
+  <div [hidden]="!error"
+       class="alert alert-danger">
+    Username or password is incorrect.
+  </div>
 </form>

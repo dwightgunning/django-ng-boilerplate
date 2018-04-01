@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { Observable } from 'rxjs/Observable';
+
+import { UserLoginCredentials } from '../models/user-login-credentials';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -9,21 +12,13 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./top-nav-bar.component.scss']
 })
 export class TopNavBarComponent implements OnInit {
+  userLoginCredentials: Observable<UserLoginCredentials>;
 
   constructor(
-    private router: Router,
-    private AuthService: AuthService) { }
+    private authService: AuthService) { }
 
   ngOnInit() {
-  }
-
-  public isAuthenticated(): boolean {
-    return this.AuthService.isAuthenticated();
-  }
-
-  public logoutUser(): void {
-    this.AuthService.logout();
-    this.router.navigate(['/']);
+    this.userLoginCredentials = this.authService.getUserLoginCredentials();
   }
 
 }

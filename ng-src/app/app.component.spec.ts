@@ -1,42 +1,24 @@
-import { APP_BASE_HREF } from '@angular/common';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { Component } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { BrowserModule } from '@angular/platform-browser';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { environment } from '../environments/environment';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthGuard } from './guards/auth.guard';
-import { HomePageComponent } from './home-page/home-page.component';
-import { LoginFormComponent } from './login-form/login-form.component';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
-import { AuthService } from './services/auth.service';
 import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
+
+@Component({selector: 'app-top-nav-bar', template: ''})
+class StubTopNavBarComponent {}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent,
-        LoginPageComponent,
-        HomePageComponent,
-        TopNavBarComponent,
-        ProfilePageComponent,
-        LoginFormComponent
+        StubTopNavBarComponent
       ],
       imports: [
-        AppRoutingModule,
-        BrowserModule,
-        FormsModule,
-        HttpModule
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
-        AuthGuard,
-        {provide: APP_BASE_HREF, useValue: '/'},
-        AuthService
       ],
     }).compileComponents();
   }));
@@ -47,16 +29,14 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app'`, async(() => {
+  it(`should have as title 'Django Angular Boilerplate'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app.title).toEqual('Django Angular Boilerplate');
   }));
 
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Django - Angular Boilerplate');
+  xit('should (probably) invoke the auth guard', async(() => {
+    expect(false).toBeTruthy();
   }));
+
 });

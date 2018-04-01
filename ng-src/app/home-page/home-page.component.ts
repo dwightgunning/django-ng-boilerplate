@@ -1,9 +1,10 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Http, Response } from '@angular/http';
-
+import { Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -11,10 +12,9 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  url = 'http://localhost:8000/api/';
   apiResponse;
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
     console.log('Initialising the homepage');
@@ -22,10 +22,17 @@ export class HomePageComponent implements OnInit {
   }
 
   private getApi() {
-    this.http.get(this.url).toPromise().then((res) => {
-      this.apiResponse = res;
-      console.log(res);
-    });
+    console.log('Get api');
+    this.http.get(environment.API_BASE_URL)
+      .map((response: Response) => {
+        this.apiResponse = JSON.stringify(response);
+        console.log(this.apiResponse);
+      })
+      .toPromise()
+      .catch((err: any) => {
+        console.log(err);
+        throw new Observable(err);
+      });
   }
 
 }

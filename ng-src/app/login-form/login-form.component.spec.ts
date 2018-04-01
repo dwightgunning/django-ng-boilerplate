@@ -1,10 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AuthService } from '../services/auth.service';
 import { LoginFormComponent } from './login-form.component';
+
+const stubAuthService = {};
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -12,16 +13,15 @@ describe('LoginFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginFormComponent ],
+      declarations: [
+        LoginFormComponent
+      ],
       imports: [
         FormsModule,
-        HttpModule
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
-        { provide: Router,
-          useClass: class { navigate = jasmine.createSpy('navigate'); }
-        },
-        AuthService
+        { provide: AuthService, userInstance: stubAuthService }
       ]
     })
     .compileComponents();

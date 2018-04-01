@@ -7,12 +7,12 @@
     </ul>
   </div>
   <div class="top-bar-right">
-    <ul class="dropdown menu" data-dropdown-menu>
-      <li *ngIf="!isAuthenticated()"><a class="hvr-line" [routerLink]="'login'" routerLinkActive="active-link">Login</a></li>
-      <li *ngIf="isAuthenticated()"><a class="hvr-line" [routerLink]="'profile'" routerLinkActive="active-link">Profile</a></li>
-      <li *ngIf="isAuthenticated()">
-        <a class="hvr-line" (click)="logoutUser()" routerLinkActive="active-link">Logout</a>
-      </li>
+    <ul class="dropdown menu" data-dropdown-menu *ngIf="!(userLoginCredentials | async)">
+        <li><a class="hvr-line" [routerLink]="'login'" routerLinkActive="active-link">Login</a></li>
+    </ul>
+    <ul class="dropdown menu" data-dropdown-menu *ngIf="(userLoginCredentials | async)">
+      <li><a class="hvr-line" [routerLink]="'profile'" routerLinkActive="active-link">Profile</a></li>
+      <li><a class="hvr-line" [routerLink]="'logout'" routerLinkActive="active-link">Logout</a></li>
     </ul>
   </div>
 </div>

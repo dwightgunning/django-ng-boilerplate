@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
@@ -11,10 +12,17 @@ import { UserService } from '../services/user.service';
 export class ProfilePageComponent implements OnInit {
   user: User = new User();
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService) { }
 
   ngOnInit() {
-    this.userService.getUser().subscribe(user => this.user = user);
+    this.getUser();
+  }
+
+  getUser(): void {
+    this.userService.getUser().subscribe(
+      user => this.user = user
+    );
   }
 
 }
