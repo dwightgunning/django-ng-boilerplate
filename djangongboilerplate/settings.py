@@ -135,7 +135,7 @@ REST_FRAMEWORK = {
 
 try:
     from djangongboilerplate.settings_local import *  # NOQA
-except:
+except Exception:
     import raven  # NOQA
     print('No settings_local.py available.')
     ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS']
@@ -152,6 +152,6 @@ except:
 
 try:
     from djangongboilerplate.settings_logging import *  # NOQA
-except:
+except Exception:
     print('Error loading logging configuration')
     raise
