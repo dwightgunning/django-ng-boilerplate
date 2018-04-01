@@ -1,5 +1,0 @@
-[pep8]
-exclude =
-  .git,
-  ./node_modules,
-  ./*/migrations

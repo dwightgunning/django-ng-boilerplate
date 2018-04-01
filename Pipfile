@@ -11,6 +11,7 @@ django-nose = "*"
 nose = "*"
 selenium = "*"
 django-cors-headers = "*"
+"flake8" = "*"
 
 
 [packages]

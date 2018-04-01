@@ -8,12 +8,18 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
+    "types": [
+      "jasmine",
+      "jasminewd2",
+      "node"
     ],
     "lib": [
       "es2016",
       "dom"
     ]
-  }
+  },
+  "include": [
+      "ng-src/**/*.ts",
+      "ng-e2e/**/*.ts"
+  ],
 }
