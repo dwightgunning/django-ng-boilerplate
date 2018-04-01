@@ -3,8 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Router } from '@angular/router';
 
-import { LoginFormComponent } from './login-form.component';
 import { AuthService } from '../services/auth.service';
+import { LoginFormComponent } from './login-form.component';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -18,7 +18,9 @@ describe('LoginFormComponent', () => {
         HttpModule
       ],
       providers: [
-        { provide: Router, useClass: class { navigate = jasmine.createSpy('navigate'); } },
+        { provide: Router,
+          useClass: class { navigate = jasmine.createSpy('navigate'); }
+        },
         AuthService
       ]
     })

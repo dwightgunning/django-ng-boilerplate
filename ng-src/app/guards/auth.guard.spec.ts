@@ -1,4 +1,4 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
@@ -8,7 +8,10 @@ describe('AuthGuard', () => {
     TestBed.configureTestingModule({
       providers: [
         AuthGuard,
-        [ { provide: Router, useClass: class { navigate = jasmine.createSpy('navigate'); } }]
+        [{
+            provide: Router,
+            useClass: class { navigate = jasmine.createSpy('navigate'); }
+          }]
       ]
     });
   });

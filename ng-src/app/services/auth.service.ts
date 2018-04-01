@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { UserLoginCredentials } from '../models/user-login-credentials';
 import { Headers, Http, RequestOptions } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+
+import { UserLoginCredentials } from '../models/user-login-credentials';
 
 @Injectable()
 export class AuthService {

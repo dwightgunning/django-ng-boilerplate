@@ -6,17 +6,17 @@ import { RouterModule } from '@angular/router';
 
 import * as Raven from 'raven-js';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { AuthGuard } from './guards/auth.guard';
 import { environment } from '../environments/environment';
-import { LoginPageComponent } from './login-page/login-page.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { AuthGuard } from './guards/auth.guard';
 import { HomePageComponent } from './home-page/home-page.component';
-import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 
 Raven
   .config(environment.SENTRY_PUBLIC_DSN)

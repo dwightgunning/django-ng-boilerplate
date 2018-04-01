@@ -4,8 +4,8 @@ import { HttpModule } from '@angular/http';
 import { Router } from '@angular/router';
 
 import { LoginFormComponent } from '../login-form/login-form.component';
-import { LoginPageComponent } from './login-page.component';
 import { AuthService } from '../services/auth.service';
+import { LoginPageComponent } from './login-page.component';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
