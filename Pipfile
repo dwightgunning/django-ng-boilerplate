@@ -7,19 +7,17 @@ name = "pypi"
 
 [dev-packages]
 
-"django-nose" = "*"
+django-nose = "*"
 nose = "*"
 selenium = "*"
-"django-cors-headers" = "*"
+django-cors-headers = "*"
 
 
 [packages]
 
-"dj-database-url" = "==0.4.2"
-django = "==2.0.0"
-djangorestframework = "==3.7.3"
-"djangorestframework-jwt" = "==1.11.0"
+dj-database-url = "==0.5.0"
+django = "==2.0.3"
+djangorestframework = "==3.7.7"
+djangorestframework-jwt = "==1.11.0"
 pytz = "==2017.2"
-raven = "==6.4.0"
-# "contextlib2" required to workaround an issue Pipfile.lock issue with raven dependencies
-"contextlib2" = "*"
+raven = "==6.6.0"
