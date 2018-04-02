@@ -1,28 +1,97 @@
-# Djangongboilerplate
+# Django-Angular Boilerplate
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.7.
+A starter project for Django + Angular.js.
 
-## Development server
+The major technologies used are:
+- [Angular.io](https://angular.io/) ([TypeScript](https://www.typescriptlang.org))
+- [SASS](http://sass-lang.com/)
+- [Foundation for Sites](https://foundation.zurb.com/sites.html)
+- [Django](https://djangoproject.com)
+- [Django REST framework](http://www.django-rest-framework.org/).
 
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Project setup
 
-## Code scaffolding
+1. Install the frontend dependencies with Yarn:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```(bash)
+yarn
+```
 
-## Build
+2. Install the backend API dependencies with Pipenv:
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `ng-dist/` directory. Use the `-prod` flag for a production build.
+```(bash)
+pipenv install
+```
 
-## Running unit tests
+3. Create the database:
 
-Run `npm run test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```(bash)
+python manage.py migrate
+```
 
-## Running end-to-end tests
+4. Create a superuser account:
 
-Run `npm run e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+```(bash)
+python manage.py createsuperuser
+```
 
-## Further help
+5. Run the frontend development server:
+
+```(bash)
+ng serve
+```
+
+Then navigate to `http://localhost:4200/`.
+
+6. Run the backend API development server:
+
+```(bash)
+python manage.py runserver
+```
+
+Now navigate to `http://localhost:8000/api/`.
+
+## Development
+
+### Angular.io - Frontend Development with Angular CLI
+
+This frontend for this project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.7.
+
+The frontend developer tooling and experience is consistent with the Angular CLI, with the following adjustments:
+ - Linting
+
+#### Linting
+
+tslint and lint-sass are setup for Typescript and SASS.
+ - Typescript: `ng lint`
+ - SASS: `npm run lint-sass`
+
+#### Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+### Django - Backend API Development
+
+The backend API for this project is built upon the [Django Framework](https://www.djangoproject.com).
+
+The backed developer tooling and experience is consistent with the Django Framework, with the following adjustments:
+ - Linting
+
+#### Linting
+
+Flake8 is setup for Python.
+ - Python: `flake8`
+
+#### Further help
+
+To get more help on the Django Framework use `python manage.py help`, go check out the [Django Framework Documentation] and the [Django REST framework API guide](http://www.django-rest-framework.org/#api-guide).
+
+### Linting on git pre-commit
+
+A python script suitable for use as a git pre-commit hook is included at `bin\pre-commit.py`. By default it lints Python, Typescript and SASS files that are staged.
+
+## Copyright and License Information
+
+Copyright (c) 2015-2018 Dwight Gunning, and individual contributors. All rights reserved.
+
+See the file "LICENSE" for information on the history of this software, terms & conditions for usage, and a DISCLAIMER OF ALL WARRANTIES.
