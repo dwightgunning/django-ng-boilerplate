@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -104,12 +105,27 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'django-staticfiles')
 STATIC_URL = '/static/'
 
+WHITENOISE_INDEX_FILE = True
+WHITENOISE_ROOT = os.path.join(BASE_DIR, 'ng-dist')
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'DIRS': (WHITENOISE_ROOT,),  # For urls catch all mapping
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 # Django Rest Framework
 
@@ -138,17 +154,16 @@ try:
 except Exception:
     import raven  # NOQA
     print('No settings_local.py available.')
-    ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS']
+    ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
     DATABASES = \
         {'default': dj_database_url.config(default=os.environ['DATABASE_URL'])}
     DEBUG = os.environ['DEBUG'] == 'True'
     EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
     RAVEN_CONFIG = {
-        'dsn': os.environ['RAVEN_CONFIG_DSN'],
-        'release': raven.fetch_git_sha(os.path.dirname(os.pardir)),
+        'dsn': os.environ['SENTRY_DSN'],
+        'release': os.environ['SOURCE_VERSION'],
     }
     SECRET_KEY = os.environ['SECRET_KEY']
-    STATIC_ROOT = os.environ['STATIC_ROOT']
 
 try:
     from djangongboilerplate.settings_logging import *  # NOQA

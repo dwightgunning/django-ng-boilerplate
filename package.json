@@ -7,7 +7,7 @@
     "start": "ng serve",
     "build": "ng build",
     "e2e": "ng e2e",
-    "heroku-postbuild": "./bin/heroku-postbuild-node",
+    "heroku-postbuild": "./bin/heroku-ng-prod-environment.js && ng build --aot --prod --output-hashing=all",
     "lint": "ng lint",
     "lint-sass": "./node_modules/sass-lint/bin/sass-lint.js -c sass-lint.yml -v -q",
     "test": "ng test --code-coverage"

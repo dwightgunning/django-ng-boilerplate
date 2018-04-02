@@ -1,0 +1,84 @@
+{
+  "name": "Django-Angular Boilerplate",
+  "description": "A starter project for Django + Angular.js.",
+  "environments": {},
+  "keywords": [],
+  "repository": "https://github.com/dwightgunning/django-ng-boilerplate",
+  "stack": "heroku-16",
+  "success_url": "/",
+  "website": "https://github.com/dwightgunning/django-ng-boilerplate",
+  "scripts": { },
+  "buildpacks": [
+    {
+      "url": "https://github.com/dwightgunning/heroku-buildpack-version"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "addons": [
+    {
+      "plan": "heroku-postgresql:hobby-dev"
+    },
+    {
+      "plan": "newrelic:wayne"
+    },
+    {
+      "plan": "sendgrid:starter"
+    },
+    {
+      "plan": "sentry:f1"
+    }
+  ],
+  "env": {
+    "ALLOWED_HOSTS": {
+      "description": "A list of strings representing the host/domain names that this Django site can serve.",
+      "value": "<<APP NAME>>.herokuapp.com"
+    },
+    "API_BASE_URL": {
+      "description": "The base URL for the API.",
+      "value": "https://<<APP NAME>>.herokuapp.com"
+    },
+    "DEBUG": {
+      "description": "A boolean that turns on/off debug mode.",
+      "value": "false"
+    },
+    "DISABLE_COLLECTSTATIC": {
+      "description": "Disable Heroku's automatic 'collectstatic' build step.",
+      "value": "true"
+    },
+    "EMAIL_BACKEND": {
+      "description": "The backend to use for sending emails.",
+      "value": "sendgrid_backend.SendgridBackend"
+    },
+    "NPM_CONFIG_PRODUCTION": {
+      "description": "Heroku Production NPM Configuration. Must be 'false' so the app can be built on Heroku at deploy time.",
+      "value": "false"
+    },
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "SENTRY_DSN_PUBLIC": {
+      "description": "The public Data Source Name (DSN) for the associated Sentry.io project.",
+      "value": ""
+    },
+    "SENTRY_DSN": {
+      "description": "The private Data Source Name (DSN) for the associated Sentry.io project.",
+      "value": ""
+    },
+    "SENTRY_CSP_ENDPOINT": {
+      "description": "The Content-Security Policy(CSP) error reporting endpoint associated Sentry.io project.",
+      "value": ""
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  }
+}

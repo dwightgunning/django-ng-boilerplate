@@ -90,6 +90,36 @@ To get more help on the Django Framework use `python manage.py help`, go check o
 
 A python script suitable for use as a git pre-commit hook is included at `bin\pre-commit.py`. By default it lints Python, Typescript and SASS files that are staged.
 
+## Deployment
+
+### Heroku
+
+#### First-time deployment
+
+On the first deployment, some initial configuration is required. Click the button to get started:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+ - App name: Pick a name for your project.
+ - Region: Wherever you like.
+
+##### Config Variables
+ - ALLOWED_HOSTS: Update the placeholder with the 'App name'.
+ - API_BASE_URL: Update the placeholder with the 'App name'.
+ - DEBUG: *Optional*. Set to `true` or `false`.
+ - DISABLE_COLLECTSTATIC: *Do not modify.*
+ - EMAIL_BACKEND: *Do not modify.*
+ - NPM_CONFIG_PRODUCTION: *Do not modify.*
+ - SENTRY_DSN_PUBLIC: *Required*.
+ - SENTRY_DSN: *Required*.
+ - SENTRY_CSP_ENDPOINT: *Required*.
+
+#### Regular deployments
+
+```(bash)
+heroku push
+```
+
 ## Copyright and License Information
 
 Copyright (c) 2015-2018 Dwight Gunning, and individual contributors. All rights reserved.
