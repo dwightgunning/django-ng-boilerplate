@@ -4,7 +4,7 @@
   "environments": {},
   "keywords": [],
   "repository": "https://github.com/dwightgunning/django-ng-boilerplate",
-  "stack": "heroku-16",
+  "stack": "heroku-18",
   "success_url": "/",
   "website": "https://github.com/dwightgunning/django-ng-boilerplate",
   "scripts": { },

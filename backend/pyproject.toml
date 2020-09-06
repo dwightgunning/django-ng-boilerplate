@@ -1,0 +1,11 @@
+[tool.black]
+target-version = ['py38']
+exclude = '''
+(
+  /(
+       \.pytest_cache
+    |  bin
+    |  coverage
+  )/
+)
+'''
