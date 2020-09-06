@@ -7,6 +7,7 @@ class APIRootView(APIView):
     """
     Basic HATEOAS root
     """
+
     permission_classes = (AllowAny,)
 
     def get(self, request, format=None):
@@ -14,8 +15,8 @@ class APIRootView(APIView):
         Return a list of all users.
         """
         paths = {
-            'auth': '/auth',
-            'objects': '/objects',
-            'user': '/user',
+            "auth": "/auth",
+            "objects": "/objects",
+            "user": "/user",
         }
         return Response(paths)

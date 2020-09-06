@@ -1,0 +1,14 @@
+[tool.black]
+target-version = ['py38']
+exclude = '''
+(
+  /(
+       \.git
+    |  \.ng-*
+    |  \.pytest_cache
+    |  bin
+    |  coverage
+    |  node_modules
+  )/
+)
+'''

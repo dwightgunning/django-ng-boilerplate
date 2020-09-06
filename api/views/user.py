@@ -29,7 +29,7 @@ class UserView(CreateModelMixin, RetrieveUpdateDestroyAPIView):
         instance.save()
 
     def get_object(self):
-        if self.request.method != 'POST' and self.request.user.is_anonymous:
+        if self.request.method != "POST" and self.request.user.is_anonymous:
             raise NotAuthenticated()
 
         try:
