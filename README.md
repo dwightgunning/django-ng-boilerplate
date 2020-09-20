@@ -165,6 +165,6 @@ Don't forget to configure the Heroku webhook and check that it appears in the li
 
 ## Copyright and License Information
 
-Copyright (c) 2015-2018 Dwight Gunning, and individual contributors. All rights reserved.
+Copyright (c) 2015-2020 Dwight Gunning, and individual contributors. All rights reserved.
 
 See the file "LICENSE" for information on the history of this software, terms & conditions for usage, and a DISCLAIMER OF ALL WARRANTIES.
