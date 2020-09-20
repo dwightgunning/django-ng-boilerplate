@@ -100,25 +100,44 @@ On the first deployment, some initial configuration is required. Click the butto
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
- - App name: Pick a name for your project.
+ - App name: Pick a name for your project. Note the name needs to be copied into a couple of the config vars (see below).
  - Region: Wherever you like.
 
-##### Config Variables
- - ALLOWED_HOSTS: Update the placeholder with the 'App name'.
- - API_BASE_URL: Update the placeholder with the 'App name'.
- - DEBUG: *Optional*. Set to `true` or `false`.
- - DISABLE_COLLECTSTATIC: *Do not modify.*
- - EMAIL_BACKEND: *Do not modify.*
- - NPM_CONFIG_PRODUCTION: *Do not modify.*
- - SENTRY_DSN_PUBLIC: *Required*.
- - SENTRY_DSN: *Required*.
- - SENTRY_CSP_ENDPOINT: *Required*.
+##### Config Vars
+
+Heroku config vars impact multiple aspects of the system:
+- The Heroku "app"
+- The Heroku build pipeline
+- The Django and Angular runtime
+
+Several variables **must** be set when first deploying the app:
+
+- ALLOWED_HOSTS: Update the placeholder with the 'App name'.
+- API_BASE_URL: Update the placeholder with the 'App name'.
+- SENTRY_DSN_PUBLIC: *Required*.
+- SENTRY_DSN: *Required*.
+- SENTRY_CSP_ENDPOINT: *Required*.
+
+Some variables are optional and/or customisable:
+- DEBUG: *Optional*. Set to `true` or `false`.
+
+The following (probably) shouldn't be modified:
+ - DISABLE_COLLECTSTATIC
+ - EMAIL_BACKEND
+ - NPM_CONFIG_PRODUCTION
 
 #### Regular deployments
 
 ```(bash)
 heroku push
 ```
+
+#### Running Django commands
+
+```(bash)
+heroku run python backend/manage.py check
+```
+
 
 ## Copyright and License Information
 

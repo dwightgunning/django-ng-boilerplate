@@ -1,6 +1,6 @@
 {
   "name": "Django-Angular Boilerplate",
-  "description": "A starter project for Django + Angular.js.",
+  "description": "A starter project for Django + Angular.",
   "environments": {},
   "keywords": [],
   "repository": "https://github.com/dwightgunning/django-ng-boilerplate",
@@ -10,13 +10,7 @@
   "scripts": { },
   "buildpacks": [
     {
-      "url": "https://github.com/dwightgunning/heroku-buildpack-version"
-    },
-    {
-      "url": "heroku/nodejs"
-    },
-    {
-      "url": "heroku/python"
+      "url": "https://github.com/negativetwelve/heroku-buildpack-subdir"
     }
   ],
   "addons": [
