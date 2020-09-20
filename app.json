@@ -44,10 +44,6 @@
       "description": "Disable Heroku's automatic 'collectstatic' build step.",
       "value": "true"
     },
-    "EMAIL_BACKEND": {
-      "description": "The backend to use for sending emails.",
-      "value": "sendgrid_backend.SendgridBackend"
-    },
     "NPM_CONFIG_PRODUCTION": {
       "description": "Heroku Production NPM Configuration. Must be 'false' so the app can be built on Heroku at deploy time.",
       "value": "false"
@@ -55,18 +51,6 @@
     "SECRET_KEY": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
-    },
-    "SENTRY_DSN_PUBLIC": {
-      "description": "The public Data Source Name (DSN) for the associated Sentry.io project.",
-      "value": ""
-    },
-    "SENTRY_DSN": {
-      "description": "The private Data Source Name (DSN) for the associated Sentry.io project.",
-      "value": ""
-    },
-    "SENTRY_CSP_ENDPOINT": {
-      "description": "The Content-Security Policy(CSP) error reporting endpoint associated Sentry.io project.",
-      "value": ""
     }
   },
   "formation": {

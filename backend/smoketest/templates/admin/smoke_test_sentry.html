@@ -1,0 +1,25 @@
+{% extends "admin/smoke_test_app_index.html" %}
+{% load i18n %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:smoke_test_index' %}">{% translate 'Smoke Test' %}</a>
+  &rsaquo; Sentry
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}
+<div id="content-main">
+  <h1>Sentry</h1>
+  <p>
+    Click below to capture a test exception with Sentry.
+    <form method="post">
+      {% csrf_token %}
+      <input type="submit" value="Capture test exception" />
+    </form>
+  </p>
+</div>
+{% endblock %}

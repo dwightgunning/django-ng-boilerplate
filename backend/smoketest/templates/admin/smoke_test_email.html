@@ -1,0 +1,46 @@
+{% extends "admin/smoke_test_app_index.html" %}
+{% load i18n %}
+
+{% if not is_popup %}
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% translate 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:smoke_test_index' %}">{% translate 'Smoke Test' %}</a>
+  &rsaquo; Email
+</div>
+{% endblock %}
+{% endif %}
+
+{% block content %}
+<div id="content-main">
+  <h1>Email</h1>
+  <h2>Admin email</h2>
+  <p>
+    Click below to email the admins.
+    <form method="post">
+      {% csrf_token %}
+      <input name="emailType" type="hidden" value="admins"/>
+      <input type="submit" value="Send admin email" />
+    </form>
+  </p>
+  <h2>Admin email</h2>
+  <p>
+    Click below to email the managers.
+    <form method="post">
+      {% csrf_token %}
+      <input name="emailType" type="hidden" value="managers"/>
+      <input type="submit" value="Send manager email" />
+    </form>
+  </p>
+  <h2>User email</h2>
+  <p>
+    Click below to email a user.
+    <form method="post">
+      {% csrf_token %}
+      <input name="emailType" type="hidden" value="user"/>
+      <input name="recipient" type="text"/>
+      <input type="submit" value="Send user email" />
+    </form>
+  </p>
+</div>
+{% endblock %}

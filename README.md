@@ -114,9 +114,6 @@ Several variables **must** be set when first deploying the app:
 
 - ALLOWED_HOSTS: Update the placeholder with the 'App name'.
 - API_BASE_URL: Update the placeholder with the 'App name'.
-- SENTRY_DSN_PUBLIC: *Required*.
-- SENTRY_DSN: *Required*.
-- SENTRY_CSP_ENDPOINT: *Required*.
 
 Some variables are optional and/or customisable:
 - DEBUG: *Optional*. Set to `true` or `false`.
@@ -138,6 +135,33 @@ heroku push
 heroku run python backend/manage.py check
 ```
 
+#### Sentry integration
+
+Heroku-Sentry integration is enabled by default via the `app.json` Heroku manifest. The integration
+automatically adds the `SENTRY_DSN` config var to the Heroku app.
+
+#### Sentry project/organisation
+
+The integration creates a new Sentry 'organisation' and 'project' for each Heroku app. If you already have 
+a Sentry account and an organisation to which the app should be linked, there are two options:
+
+1. Create a project in Sentry and set the SENTRY_DSN config var manually when creating the Heroku app.
+
+2. Create the app and transfer the project to an organisation accessible from your existing user:
+- Use the Heroku dashboard to login to Sentry
+- Navigate to the Project settings in the Sentry dashboard
+- Choose 'transfer ownership' option and enter the username of your pre-existing Sentry account
+- Logout of Sentry (this is important as the email sent by Sentry contains a one-time-use code)
+- Check your email for the request to transfer ownership. Follow the link.
+- Choose an existing organisation to transfer ownership. 
+
+#### Sentry release tracking
+
+To track releases, two Sentry integrations are needed. Firstly, an SCM/Repository (e.g. BitBucket,
+Github, GitLab) must be setup. Then the Heroku integration can be added and configured. Detailed 
+instructions are given in [this blog post](https://blog.sentry.io/2020/06/10/access-commit-data-for-each-release-with-sentry-and-heroku).
+
+Don't forget to configure the Heroku webhook and check that it appears in the list of integrations.
 
 ## Copyright and License Information
 

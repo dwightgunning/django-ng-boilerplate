@@ -15,31 +15,30 @@ from pathlib import Path
 
 import dj_database_url
 
+DEBUG = False
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    "smoketest.apps.SmokeTestAppConfig",
+    "smoketest.apps.SmokeTestAdminConfig",
+    # "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "raven.contrib.django.raven_compat",
     "rest_framework",
     "api.apps.ApiConfig",
-    "django_nose",  # Must be last
 ]
 
 MIDDLEWARE = [
-    "raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -51,22 +50,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "djangongboilerplate.urls"
-
-TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
-            ],
-        },
-    },
-]
 
 WSGI_APPLICATION = "djangongboilerplate.wsgi.application"
 
@@ -103,32 +86,37 @@ USE_L10N = True
 
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(os.path.dirname(Path(__file__).parents[1]), "staticfiles") # "/app/staticfiles" # os.path.join(BASE_DIR, "django-staticfiles")
+STATIC_ROOT = os.path.join(
+    os.path.dirname(Path(__file__).parents[1]), "staticfiles"
+)  # "/app/staticfiles" # os.path.join(BASE_DIR, "django-staticfiles")
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     os.path.join(os.path.dirname(Path(__file__).parents[1]), "frontend", "dist")
 ]
 
-# WHITENOISE_INDEX_FILE = True
-WHITENOISE_ROOT = os.path.join(os.path.dirname(Path(__file__).parents[1]), "staticfiles") # "/app/frontend/" # os.path.join(BASE_DIR, "dist")
+WHITENOISE_ROOT = os.path.join(
+    os.path.dirname(Path(__file__).parents[1]), "staticfiles"
+)
+
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "APP_DIRS": True,
-        "DIRS": (os.path.join(os.path.dirname(Path(__file__).parents[1]), "staticfiles"),),
+        "DIRS": (
+            os.path.join(os.path.dirname(Path(__file__).parents[1]), "staticfiles"),
+        ),
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
-                "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
+                "django.template.context_processors.request",
                 "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
-
 # Django Rest Framework
 
 REST_FRAMEWORK = {
@@ -148,27 +136,86 @@ REST_FRAMEWORK = {
     ),
 }
 
+# Django built-in loggers: django, django.request,
+#                          django.db.backends, django.security.*
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": True,
+    "root": {
+        "level": "WARNING",
+        "handlers": ["console"],
+    },
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s %(levelname)s %(module)s "
+            "%(process)d %(thread)d] %(message)s"
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "loggers": {
+        "api": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "djangongboilerplate": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "smoketest": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        #  Django framework logging
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "WARNING",
+        },
+        "django.request": {
+            "handlers": ["console"],
+            "level": "WARNING",
+        },
+        "django.db": {
+            "handlers": ["console"],
+            "level": "WARNING",
+        },
+    },
+}
 
 # Environment specific settings
-
 try:
     from djangongboilerplate.settings_local import *  # NOQA
-except Exception:
-    import raven  # NOQA
 
+    if DEBUG:
+        # make all loggers use the console.
+        for logger in LOGGING["loggers"]:
+            LOGGING["loggers"][logger]["handlers"] = ["console"]
+            LOGGING["loggers"][logger]["level"] = "DEBUG"
+        LOGGING["loggers"]["django.utils"] = {"level": "INFO"}
+        LOGGING["loggers"]["django.db.backends"] = {"level": "INFO"}
+
+except Exception:
     print("No settings_local.py available.")
     ALLOWED_HOSTS = [os.environ["ALLOWED_HOSTS"]]
     DATABASES = {"default": dj_database_url.config(default=os.environ["DATABASE_URL"])}
     DEBUG = os.environ["DEBUG"] == "True"
-    EMAIL_BACKEND = os.environ["EMAIL_BACKEND"]
-    RAVEN_CONFIG = {
-        "dsn": os.environ["SENTRY_DSN"],
-        "release": os.environ["SOURCE_VERSION"],
-    }
+    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
+    EMAIL_HOST= 'smtp.sendgrid.net'
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
     SECRET_KEY = os.environ["SECRET_KEY"]
 
-try:
-    from djangongboilerplate.settings_logging import *  # NOQA
-except Exception:
-    print("Error loading logging configuration")
-    raise
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+
+    sentry_sdk.init(dsn=os.environ["SENTRY_DSN"], integrations=[DjangoIntegration()])
+

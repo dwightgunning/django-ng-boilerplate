@@ -1,0 +1,7 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block userlinks %}
+  <a href="{% url 'admin:smoke_test_index' %}">{% translate 'Smoke Test' %}</a> /
+  {{ block.super }}
+{% endblock %}
