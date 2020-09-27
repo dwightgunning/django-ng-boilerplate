@@ -24,8 +24,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders', #  Avoids CORS errors from ng-cli local dev server
     'rest_framework',
-    'api.apps.ApiConfig',
-    'django_nose' # Must be last
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [

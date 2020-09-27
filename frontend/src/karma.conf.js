@@ -1,6 +1,7 @@
 module.exports = function (config) {
 
   const process = require('process');
+  const path = require('path');
 
   config.set({
     angularCli: {
@@ -14,6 +15,7 @@ module.exports = function (config) {
     },
     colors: true,
     coverageIstanbulReporter: {
+      dir: path.join(__dirname, '..', '..', 'coverage', 'frontend'),
       reports: [ 'html', 'lcovonly' ],
       fixWebpackSourcePaths: true,
       thresholds: {

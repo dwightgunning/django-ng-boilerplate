@@ -5,7 +5,34 @@ exclude = '''
   /(
        \.pytest_cache
     |  bin
-    |  coverage
   )/
 )
 '''
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "djangongboilerplate.settings"
+#addopts = "--cov=. --cov-report term --cov-report html:../coverage/backend/ --no-cov-on-fail"
+addopts = '''
+  --cov=.
+  --cov-report term
+  --cov-report html:../coverage/backend/
+  --no-cov-on-fail
+'''
+filterwarnings = [
+  "ignore::DeprecationWarning:rest_framework.*:",
+  "ignore::django.utils.deprecation.RemovedInDjango40Warning:rest_framework.*:",
+  "ignore::UserWarning:whitenoise.base.*:"
+]
+
+[tool.coverage.run]
+branch = true
+data_file = "../coverage/backend/.coverage"
+omit = [
+  "*migrations*",
+  "*tests*",
+  "*settings*",
+  "*wsgi*"
+]
+
+[tool.coverage.report]
+show_missing = true
