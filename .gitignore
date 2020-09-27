@@ -21,7 +21,6 @@ Thumbs.db
 
 # Backend Django
 backend/.pytest_cache
-backend/coverage
 backend/djangongboilerplate/settings_local.py
 
 # Frontend Angular
@@ -38,6 +37,9 @@ frontend/src/environments/environment.ts
 frontend/src/environments/environment.prod.ts
 frontend/typings
 frontend/yarn-error.log
+
+# Code quality
+coverage
 
 # Runtime
 staticfiles/
