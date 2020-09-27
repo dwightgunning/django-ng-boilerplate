@@ -207,15 +207,14 @@ except Exception:
     ALLOWED_HOSTS = [os.environ["ALLOWED_HOSTS"]]
     DATABASES = {"default": dj_database_url.config(default=os.environ["DATABASE_URL"])}
     DEBUG = os.environ["DEBUG"] == "True"
-    EMAIL_HOST_USER = os.environ['SENDGRID_USERNAME']
-    EMAIL_HOST= 'smtp.sendgrid.net'
+    EMAIL_HOST_USER = os.environ["SENDGRID_USERNAME"]
+    EMAIL_HOST = "smtp.sendgrid.net"
     EMAIL_PORT = 587
     EMAIL_USE_TLS = True
-    EMAIL_HOST_PASSWORD = os.environ['SENDGRID_PASSWORD']
+    EMAIL_HOST_PASSWORD = os.environ["SENDGRID_PASSWORD"]
     SECRET_KEY = os.environ["SECRET_KEY"]
 
     import sentry_sdk
     from sentry_sdk.integrations.django import DjangoIntegration
 
     sentry_sdk.init(dsn=os.environ["SENTRY_DSN"], integrations=[DjangoIntegration()])
-
