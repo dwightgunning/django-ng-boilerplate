@@ -25,7 +25,6 @@ backend/djangongboilerplate/settings_local.py
 
 # Frontend Angular
 frontend/.sass-cache
-frontend/coverage
 frontend/dist
 frontend/dev-proxy.conf.js
 frontend/e2e/*.js
