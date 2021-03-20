@@ -16,7 +16,7 @@ pytest = "==6.1.0"
 [packages]
 dj-database-url = "==0.5.0"
 django = "==3.1.1"
-djangorestframework = "==3.11.1"
+djangorestframework = "==3.11.2"
 djangorestframework-jwt = "==1.11.0"
 gevent = "==20.9.0"
 greenlet = "==0.4.17"
